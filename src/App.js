@@ -66,16 +66,17 @@ export default class App extends Component {
 
   render() {
     const { images, showModal, imageId } = this.state;
-    const image = images.find((image) => image.id === imageId);
+    const image = images.find(image => image.id === imageId);
     return (
       <div className="App">
+        {showModal && <Modal onClose={this.closeModal} image={image}></Modal>}
         <header className="App-header">
           <h1>Image finder</h1>
         </header>
         <ToastContainer autoClose={3000} />
-        {showModal && <Modal onClose={this.closeModal} image={image}></Modal>}
+
         <Searchbar onSubmit={this.handleQChange} />
-        <ImageGallery images={this.state.images} onClick={this.openModal} />
+        <ImageGallery images={images} onClick={this.openModal} />
         {this.state.loading === true && (
           <div className="loader">
             <Loader
