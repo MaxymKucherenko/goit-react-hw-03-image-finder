@@ -6,7 +6,7 @@ import ImageGallery from "./components/ImageGallery";
 import LoadMoreButton from "./components/Button";
 import Modal from "./components/Modal";
 import { ToastContainer} from "react-toastify";
-import './App.css';
+import './App';
 
 export default class App extends Component {
   state = {
@@ -22,6 +22,7 @@ export default class App extends Component {
     this.setState({
       loading: true,
     });
+    
     search(query, 1).then((response) =>
       this.setState({
         images: response.data.hits,
@@ -36,6 +37,7 @@ export default class App extends Component {
     this.setState({
       loading: true,
     });
+
     search(this.state.query, this.state.page).then((response) => {
       this.setState({
         images: [...this.state.images, ...response.data.hits],

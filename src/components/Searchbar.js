@@ -27,7 +27,7 @@ class Searchbar extends Component {
       return;
     }
     this.props.onSubmit(this.state.query);
-    this.setState({ searcText: "" });
+    this.setState({ searchText: "" });
   };
 
   render() {
@@ -45,7 +45,7 @@ class Searchbar extends Component {
               autoComplete="on"
               autoFocus
               placeholder="Search images and photos"
-              name="searcText"
+              name="searchText"
               value={this.state.query}
               onChange={this.handleQChange}
             />
