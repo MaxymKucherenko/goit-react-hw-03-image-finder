@@ -1,18 +1,18 @@
-import { Component } from 'react'
-import Loader from "react-loader-spinner";
+import { Component } from 'react';
+import Loader from 'react-loader-spinner';
 import { search } from './services/Api';
-import Searchbar from './components/Searchbar'
-import ImageGallery from "./components/ImageGallery";
-import LoadMoreButton from "./components/Button";
-import Modal from "./components/Modal";
-import { ToastContainer} from "react-toastify";
+import Searchbar from './components/Searchbar';
+import ImageGallery from './components/ImageGallery';
+import LoadMoreButton from './components/Button';
+import Modal from './components/Modal';
+import { ToastContainer } from 'react-toastify';
 import './App';
 
 export default class App extends Component {
   state = {
     images: [],
     showModal: false,
-    query: "",
+    query: '',
     page: 1,
     loading: false,
     imageId: null,
@@ -22,7 +22,7 @@ export default class App extends Component {
     this.setState({
       loading: true,
     });
-    
+
     search(query, 1).then((response) =>
       this.setState({
         images: response.data.hits,
@@ -47,7 +47,7 @@ export default class App extends Component {
 
       window.scrollTo({
         top: document.documentElement.scrollHeight,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     });
   };
@@ -68,7 +68,7 @@ export default class App extends Component {
 
   render() {
     const { images, showModal, imageId } = this.state;
-    const image = images.find(image => image.id === imageId);
+    const image = images.find((image) => image.id === imageId);
     return (
       <div className="App">
         {showModal && <Modal onClose={this.closeModal} image={image}></Modal>}
