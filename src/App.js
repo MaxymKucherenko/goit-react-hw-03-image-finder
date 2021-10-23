@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Loader from "react-loader-spinner";
-import { search } from './components/Api';
+import { search } from './services/Api';
 import Searchbar from './components/Searchbar'
 import ImageGallery from "./components/ImageGallery";
 import LoadMoreButton from "./components/Button";
@@ -39,11 +39,11 @@ export default class App extends Component {
     });
 
     search(this.state.query, this.state.page).then((response) => {
-      this.setState({
-        images: [...this.state.images, ...response.data.hits],
-        page: this.state.page + 1,
+      this.setState((prevState) => ({
+        images: [...prevState.images, ...response.data.hits],
+        page: prevState.page + 1,
         loading: false,
-      });
+      }));
 
       window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -82,6 +82,7 @@ export default class App extends Component {
         {this.state.loading === true && (
           <div className="loader">
             <Loader
+              className="Button-container"
               type="Puff"
               color="#00BFFF"
               height={100}
@@ -91,10 +92,12 @@ export default class App extends Component {
           </div>
         )}
         {this.state.images.length !== 0 && (
-          <LoadMoreButton
-            handleLoadMore={this.handleLoadMore}
-            disabled={this.state.loading}
-          />
+          <div className="Button-container">
+            <LoadMoreButton
+              handleLoadMore={this.handleLoadMore}
+              disabled={this.state.loading}
+            />
+          </div>
         )}
       </div>
     );
